@@ -1,6 +1,8 @@
 package Uppgifter;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class UppgifterV7 {
 
@@ -50,16 +52,66 @@ public class UppgifterV7 {
 		 }
 		 
 		 //Get value with highest frequency
+		 int mostFrequentNumber = -1;
+		 int maxFrequency = 0;
 		 
+		 for(Map.Entry<Integer, Integer> entry : valueCounts.entrySet()) {
+			 if(entry.getValue() > maxFrequency){
+				 maxFrequency = entry.getValue();
+				 mostFrequentNumber = entry.getKey();
+			 }
+		 }
 		 
-		 return -1;
+		 return mostFrequentNumber;
 	 }
-
+	 
+	 /**
+	  * Returns true if there is one or more duplicate elements in an unsorted array.
+	  * If a contains [ 2, 5, 3, 2 ] the method will return true since it contains 
+	  * duplicate elements with value 2.
+	  *
+	  * @param a an unsorted array
+	  * @return true if there are duplicates in the array, false if not
+	  */
+	 public static boolean isDuplicateElements(int[] a) {
+		 
+		 HashMap<Integer, Integer> valueFreq = new HashMap<>();
+		 
+		 for(int value : a) {
+			 valueFreq.put(value, valueFreq.getOrDefault(value, 0) + 1);
+			 if(valueFreq.get(value) > 1) {
+				 return true;
+			 }
+		 }
+		 return false;
+	 }
+	 
+	 /**
+	  * Returns true if there are two elements in array 'a' with 
+	  * sum equal to parameter 'sum'.
+	  *
+	  * @param a the array we want to search
+	  * @param sum the sum we want to look for
+	  * @return true if there are two elements with a sum equal to sum
+	  */
+	public static boolean isSumEqualTo(int[] a, int sum) {
+		
+		HashSet<Integer> nums = new HashSet<>();
+		
+		for(int i : a) {
+			if(nums.contains(sum - i)) {
+				return true;
+			}else {
+				nums.add(i);
+			}
+		}
+		return false;
+	}
 	 
 	 public static void main(String[] args) {
 		 
-		 int[] intList = {2, 4, 2, 4, 4};
-		 System.out.println(findMostFrequentNumber(intList));
+		 int[] intList = {2, 4, 4};
+		 System.out.println(isSumEqualTo(intList, 4));
 		
 	}
 }

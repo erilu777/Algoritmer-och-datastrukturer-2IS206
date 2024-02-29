@@ -120,10 +120,58 @@ public class UppgifterV8 {
     	arr[index2] = temp;
     }
     
+    /**
+     * Return index of first occurrence of value t in array n or -1
+     * if the value of t is not present in the array. If n contains
+     * { 3, 4, 6, 1, 4 } and t is 4, the method will return 1.
+     *
+     * @param n the unsorted array we want to search
+     * @param t the value we want to search for
+     * @return index of the first occurrence of t or -1 if the value is not present
+     */
+   public static int findFirst(int[] n, int find) {
+	   
+	   for(int i = 0; i < n.length; i++) {
+		   if(n[i] == find) {
+			   return i;
+		   }   
+	   }
+	   return -1;
+   }
+    
+   /**
+    * Find the second-largest value in array n.
+    *
+    * @param n the array we want to search in
+    * @return the second-largest value in the array
+    */
+   public static int findSecondLargestValue(int[] a){
+	   
+	   int max_index = 0;
+	   
+	   for(int i = 1; i < a.length; i++) {
+		   if(a[i] > a[max_index]) {
+			   max_index = i;
+		   }
+	   }
+	   
+	   a[max_index] = Integer.MIN_VALUE;
+	   
+	   max_index  = 0;
+	   
+	   for(int i = 1; i < a.length; i++) {
+		   if(a[i] > a[max_index]) {
+			   max_index = i;
+		   }
+	   }
+	   
+	   return max_index;
+   }
+   
+    
 	public static void main(String[] args) {
 		int[] arr = {8, 3, 1, 7, 0, 10, 2};
-		quickSort(arr, 0, arr.length - 1);
-		System.out.println(Arrays.toString(arr));
+		System.out.println(findSecondLargestValue(arr));
 }
 }
 
